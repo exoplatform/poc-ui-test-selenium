@@ -73,9 +73,6 @@
 							<goal>test</goal>
 						</goals>
 						<configuration>
-							<systemPropertyVariables>
-								<webdriver.port>8080</webdriver.port>
-							</systemPropertyVariables>
 							<suiteXmlFiles>
 								<suiteXmlFile>target/selenium/suites/${testSuite}.xml</suiteXmlFile>
 							</suiteXmlFiles>
