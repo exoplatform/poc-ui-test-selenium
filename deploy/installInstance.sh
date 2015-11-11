@@ -9,7 +9,7 @@ source _functions_download.sh
 source _functions.sh
 
 #do_download_server https://repository.exoplatform.com
-source ./_downloadPLF.sh 4.3.x-SNAPSHOT
+source ./_downloadPLF.sh ${VERSION}
 
 mkdir -p ${PLF_SRV_DIR}
 
