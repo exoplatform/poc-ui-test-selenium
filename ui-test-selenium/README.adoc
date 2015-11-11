@@ -1,3 +1,3 @@
 = Selenium GRID
 
-mvn verify -Dbrowser=chrome -Dplatform=LINUX -DhubURL=http://192.168.99.100:4444/wd/hub -DplfURL=http://192.168.99.101:8080/portal
+mvn verify -DtestSuite=wiki-sniff -Dbrowser=chrome -Dplatform=LINUX -DhubURL=http://192.168.99.100:4444/wd/hub -DplfURL=http://192.168.99.101:8080/portal
