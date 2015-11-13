@@ -11,13 +11,13 @@ export OFFLINE=${OFFLINE:-false}
 export DB_TYPE=mysql
 export DB_VERSION=5.5
 
-#export PLF_ARTIFACT_GROUPID=com.exoplatform.platform.distributions
-#export PLF_ARTIFACT_ARTIFACTID=plf-enterprise-tomcat-standalone
+export PLF_ARTIFACT_GROUPID=com.exoplatform.platform.distributions
+export PLF_ARTIFACT_ARTIFACTID=plf-enterprise-tomcat-standalone
 #export PLF_VERSION=4.3.x-SNAPSHOT
 
-export PLF_ARTIFACT_GROUPID=${QA_PLF_ARTIFACT_GROUPID:?Mandatory}
-export PLF_ARTIFACT_ARTIFACTID=${QA_PLF_ARTIFACT_ARTIFACTID:?Mandatory}
-export PLF_VERSION=${QA_PLF_VERSION:?Mandatory}
+#export PLF_ARTIFACT_GROUPID=${QA_PLF_ARTIFACT_GROUPID:?Mandatory}
+#export PLF_ARTIFACT_ARTIFACTID=${QA_PLF_ARTIFACT_ARTIFACTID:?Mandatory}
+export PLF_VERSION=${PLF_VERSION:?Mandatory}
 
 export PLF_INSTALLER_IMAGE=plf-installer
 

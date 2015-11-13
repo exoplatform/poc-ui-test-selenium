@@ -1,6 +1,8 @@
 #!/bin/bash -eu
 
-export BUILD_ID=${BUILD_ID:"undef"}
+export BUILD_ID=${BUILD_ID:-"1"}
+
+export BASEDIR=${BASEDIR:-$(dirname $0)}
 
 source ${BASEDIR}/_functions_docker.sh
 source ${BASEDIR}/env.${BUILD_ID}
