@@ -22,4 +22,4 @@ wait_open_port ${PLF_HOST} ${PLF_PORT}
 
 echo "INFO PLF started and available at ${PLF_URL}"
 
-echo "export PLF_URL=${PLF_URL}" >> env.${BUILD_ID}
+echo "export PLF_URL=${PLF_URL}" >> ${BASEDIR}/env.${BUILD_ID}
