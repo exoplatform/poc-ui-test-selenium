@@ -16,17 +16,12 @@ elif test "${SCRIPT_DIR:0:1}" != "/"; then
 fi
 
 # #############################################################################
-# Load shared functions
-# #############################################################################
-source "${SCRIPT_DIR}/_functions_core.sh"
-
-# #############################################################################
 # Download related functions
 # #############################################################################
 
 do_curl() {
   if [ $# -lt 4 ]; then
-    echo_error "No enough parameters for function do_curl !"
+    echo "ERROR : "No enough parameters for function do_curl !"
     exit 1;
   fi
 
@@ -46,7 +41,7 @@ do_curl() {
   set +e
   curl ${_curlOptions} "$_url" > ${_filePath}
   if [ "$?" -ne "0" ]; then
-    echo_error "Sorry, cannot download $_description"
+    echo "ERROR Sorry, cannot download $_description"
     rm -f ${_filePath} # Remove potential corrupted file
     exit 1
   fi
@@ -64,7 +59,7 @@ do_curl() {
 #
 do_download_maven_artifact() {
   if [ $# -lt 10 ]; then
-    echo_error "No enough parameters for function do_download_maven_artifact !"
+    echo "ERROR No enough parameters for function do_download_maven_artifact !"
     exit 1;
   fi
 
@@ -150,7 +145,7 @@ do_download_maven_artifact() {
       fi
     fi
     if [ -z "$_artifactTimestamp" ]; then
-      echo_error "No package available in the remote repository and no previous version available locally."
+      echo "ERROR No package available in the remote repository and no previous version available locally."
       exit 1;
     fi
     rm -f ${_metadataFile}.bck
@@ -200,7 +195,7 @@ do_download_maven_artifact() {
   set +e
   shasum -c ${_sha1File}.tmp
   if [ "$?" -ne "0" ]; then
-    echo_error "Sorry, $_name download integrity failed"
+    echo "ERROR Sorry, $_name download integrity failed"
     rm -f ${_artifactFile}
     rm -f ${_sha1File}
     rm -f ${_sha1File}.tmp
@@ -230,7 +225,7 @@ do_download_maven_artifact() {
     ;;
   esac
   if [ "$?" -ne "0" ]; then
-    echo_error "Sorry, $_name archive integrity failed. Local copy is deleted."
+    echo "ERROR  Sorry, $_name archive integrity failed. Local copy is deleted."
     rm -f ${_artifactFile}
     rm -f ${mavenSha1}
     exit 1
@@ -272,7 +267,7 @@ EOF
 
 do_load_artifact_descriptor() {
   if [ $# -lt 3 ]; then
-    echo_error "No enough parameters for function do_load_artifact_descriptor !"
+    echo "ERROR No enough parameters for function do_load_artifact_descriptor !"
     exit 1;
   fi
   local _downloadDirectory="$1";
@@ -289,7 +284,7 @@ do_load_artifact_descriptor() {
 #
 do_http_download_with_sha1() {
   if [ $# -lt 5 ]; then
-    echo_error "No enough parameters for function do_http_download_with_sha1 !"
+    echo "ERROR No enough parameters for function do_http_download_with_sha1 !"
     exit 1;
   fi
 
@@ -345,7 +340,7 @@ do_http_download_with_sha1() {
   cd `dirname ${_localPath}`
   shasum -c ${_sha1File}
   if [ "$?" -ne "0" ]; then
-    echo_error "Sorry, $_description download integrity failed"
+    echo "ERROR Sorry, $_description download integrity failed"
     rm -f ${_localPath}
     rm -f ${_sha1File}
     exit 1
@@ -361,7 +356,7 @@ do_http_download_with_sha1() {
   set +e
   zip -T ${_localPath}
   if [ "$?" -ne "0" ]; then
-    echo_error "Sorry, $_description archive integrity failed"
+    echo "ERROR Sorry, $_description archive integrity failed"
     rm -f ${_localPath}
     exit 1
   fi

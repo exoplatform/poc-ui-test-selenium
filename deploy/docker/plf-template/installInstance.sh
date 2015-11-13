@@ -44,6 +44,8 @@ cp ${PLF_SRV_DIR}/current/conf/server-mysql.xml ${PLF_SRV_DIR}/current/conf/serv
 mv ${PLF_SRV_DIR}/current/conf/server.xml ${PLF_SRV_DIR}/current/conf/server.xml.ori
 cp ${PLF_SRV_DIR}/current/conf/server-mysql.xml ${PLF_SRV_DIR}/current/conf/server.xml
 
+sed -i 's/localhost:3306/db:3306/g' ${PLF_SRV_DIR}/current/conf/server.xml
+
 MYSQL_JAR_URL="http://repository.exoplatform.org/public/mysql/mysql-connector-java/${DEPLOYMENT_MYSQL_DRIVER_VERSION}/mysql-connector-java-${DEPLOYMENT_MYSQL_DRIVER_VERSION}.jar"
 pushd .
 
@@ -64,3 +66,13 @@ cp -f "${DL_DIR}/mysql-connector-java/${DEPLOYMENT_MYSQL_DRIVER_VERSION}/"`basen
 
 set -e
 echo "[INFO] Done"
+
+echo "[INFO] ======================================="
+echo "[INFO] = Installing Acme addon"
+echo "[INFO] ======================================="
+${PLF_SRV_DIR}/current/addon install exo-acme-sample:4.3.x-SNAPSHOT
+
+echo "[INFO] ======================================="
+echo "[INFO] = Starting instance"
+echo "[INFO] ======================================="
+${PLF_SRV_DIR}/current/start_eXo.sh

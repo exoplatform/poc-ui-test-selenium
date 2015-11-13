@@ -53,11 +53,17 @@ do_curl() {
 
   echo "[INFO] Downloading $_description from $_url ..."
   set +e
-  curl $_curlOptions "$_url" > $_filePath
-  if [ "$?" -ne "0" ]; then
-    echo "[ERROR] Sorry, cannot download $_description"
-    rm -f $_filePath # Remove potential corrupted file
-    exit 1
+  if [ "${OFFLINE}" != "true" ]
+  then
+    curl $_curlOptions "$_url" > $_filePath
+    if [ "$?" -ne "0" ]; then
+      echo "[ERROR] Sorry, cannot download $_description"
+      rm -f $_filePath # Remove potential corrupted file
+      exit 1
+    fi
+  else
+    # TODO test if file exists in local
+    echo Offline mode activated
   fi
   set -e
   echo "[INFO] $_description downloaded"
