@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+export BUILD_ID=${BUILD_ID:"1"}
+
 export DOCKER_HOST=${QA_DOCKER_HOST:?QA_DOCKER_HOST is mandatory}
 
 export OFFLINE=${OFFLINE:false}
@@ -24,17 +26,6 @@ export PLF_NAME=${PLF_ARTIFACT_ARTIFACTID}_${PLF_VERSION}_${TS_TIMESTAMP}
 export NEXUS_USER=${QA_NEXUS_USER:?Mandatory}
 export NEXUS_USER=${QA_NEXUS_PASSWORD:?Mandatory}
 
-function finish {
-  echo INFO Cleaning database container ${DB_CONTAINER_ID} ...
-  docker kill ${DB_CONTAINER_ID}
-  docker rm -v ${DB_CONTAINER_ID}
-
-  echo INFO Cleaning PLF container ${DB_CONTAINER_ID} ...
-  docker kill ${PLF_NAME}
-  docker rm ${PLF_NAME}
-}
-trap finish EXIT
-
 type docker > /dev/null
 if [ $? -ne 0 ]
 then
@@ -42,9 +33,16 @@ then
   exit 1
 fi
 
+echo > env.${BUILD_ID}
+
 eval $(./_installPlatform.sh)
 echo [INFO] Platform installed on volume ${PLF_NAME}
 
 eval $(./_startDatabaseContainer.sh)
 
 ./_startPlatform.sh
+
+echo "export DB_CONTAINER_ID=${DB_CONTAINER_ID}" >> env.${BUILD_ID}
+echo "export PLF_NAME=${PLF_NAME}" >> env.${BUILD_ID}
+
+exit 0

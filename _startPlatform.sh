@@ -21,3 +21,5 @@ docker logs -f ${PLF_NAME} &
 wait_open_port ${PLF_HOST} ${PLF_PORT}
 
 echo "INFO PLF started and available at ${PLF_URL}"
+
+echo "export PLF_URL=${PLF_URL}" >> env.${BUILD_ID}
