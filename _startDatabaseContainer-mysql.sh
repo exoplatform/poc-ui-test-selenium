@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-source ./_functions_docker.sh
+source ${BASEDIR}/_functions_docker.sh
 
 IMAGE=mysql
 VERSION=${DB_VERSION}

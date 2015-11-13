@@ -2,8 +2,8 @@
 
 export BUILD_ID=${BUILD_ID:"undef"}
 
-source ./_functions_docker.sh
-source ./env.${BUILD_ID}
+source ${BASEDIR}/_functions_docker.sh
+source ${BASEDIR}/env.${BUILD_ID}
 
 echo "INFO Cleaning database container"
 docker rm -f ${DB_CONTAINER_ID}

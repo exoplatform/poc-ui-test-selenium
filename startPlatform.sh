@@ -1,21 +1,23 @@
 #!/bin/bash -eu
 
-export BUILD_ID=${BUILD_ID:"1"}
+export BASEDIR=${BASEDIR:-$(dirname $0)}
+
+export BUILD_ID=${BUILD_ID:-"1"}
 
 export DOCKER_HOST=${QA_DOCKER_HOST:?QA_DOCKER_HOST is mandatory}
 
-export OFFLINE=${OFFLINE:false}
+export OFFLINE=${OFFLINE:-false}
 
 export DB_TYPE=mysql
 export DB_VERSION=5.5
 
-export PLF_ARTIFACT_GROUPID=com.exoplatform.platform.distributions
-export PLF_ARTIFACT_ARTIFACTID=plf-enterprise-tomcat-standalone
-export PLF_VERSION=4.3.x-SNAPSHOT
+#export PLF_ARTIFACT_GROUPID=com.exoplatform.platform.distributions
+#export PLF_ARTIFACT_ARTIFACTID=plf-enterprise-tomcat-standalone
+#export PLF_VERSION=4.3.x-SNAPSHOT
 
-#export PLF_ARTIFACT_GROUPID=${QA_PLF_ARTIFACT_GROUPID:?Mandatory}
-#export PLF_ARTIFACT_ARTIFACTID=${QA_PLF_ARTIFACT_ARTIFACTID:?Mandatory}
-#export PLF_VERSION=${QA_PLF_VERSION:?Mandatory}
+export PLF_ARTIFACT_GROUPID=${QA_PLF_ARTIFACT_GROUPID:?Mandatory}
+export PLF_ARTIFACT_ARTIFACTID=${QA_PLF_ARTIFACT_ARTIFACTID:?Mandatory}
+export PLF_VERSION=${QA_PLF_VERSION:?Mandatory}
 
 export PLF_INSTALLER_IMAGE=plf-installer
 
@@ -35,14 +37,14 @@ fi
 
 echo > env.${BUILD_ID}
 
-eval $(./_installPlatform.sh)
+eval $(${BASEDIR}/_installPlatform.sh)
 echo [INFO] Platform installed on volume ${PLF_NAME}
 
-eval $(./_startDatabaseContainer.sh)
+eval $(${BASEDIR}/_startDatabaseContainer.sh)
 
-./_startPlatform.sh
+${BASEDIR}/_startPlatform.sh
 
-echo "export DB_CONTAINER_ID=${DB_CONTAINER_ID}" >> env.${BUILD_ID}
-echo "export PLF_NAME=${PLF_NAME}" >> env.${BUILD_ID}
+echo "export DB_CONTAINER_ID=${DB_CONTAINER_ID}" >> ${BASEDIR}/env.${BUILD_ID}
+echo "export PLF_NAME=${PLF_NAME}" >> ${BASEDIR}/env.${BUILD_ID}
 
 exit 0

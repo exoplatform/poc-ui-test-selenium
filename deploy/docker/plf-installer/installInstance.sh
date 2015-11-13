@@ -70,4 +70,4 @@ echo "[INFO] Done"
 echo "[INFO] ======================================="
 echo "[INFO] = Installing Acme addon"
 echo "[INFO] ======================================="
-${PLF_SRV_DIR}/current/addon install exo-acme-sample:4.3.x-SNAPSHOT
+${PLF_SRV_DIR}/current/addon install exo-acme-sample:${VERSION}

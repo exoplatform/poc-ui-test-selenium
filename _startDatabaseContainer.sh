@@ -11,4 +11,4 @@ DB_VERSION=${DB_VERSION:?DB_VERSION is mandatory}
 
 DOCKER_HOST=${DOCKER_HOST:?DOCKER_HOST is mandatory}
 
-./_startDatabaseContainer-${DB_TYPE}.sh
+${BASEDIR}/_startDatabaseContainer-${DB_TYPE}.sh
