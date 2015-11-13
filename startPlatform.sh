@@ -44,7 +44,7 @@ eval $(${BASEDIR}/_startDatabaseContainer.sh)
 
 ${BASEDIR}/_startPlatform.sh
 
-echo "export DB_CONTAINER_ID=${DB_CONTAINER_ID}" >> ${BASEDIR}/env.${BUILD_ID}
-echo "export PLF_NAME=${PLF_NAME}" >> ${BASEDIR}/env.${BUILD_ID}
+echo "DB_CONTAINER_ID=${DB_CONTAINER_ID}" >> ${BASEDIR}/env.${BUILD_ID}
+echo "PLF_NAME=${PLF_NAME}" >> ${BASEDIR}/env.${BUILD_ID}
 
 exit 0
