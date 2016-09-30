@@ -1,0 +1,12 @@
+version: '2'
+services:
+  selenium_hub:
+    image: 'selenium/hub:2.53.0'
+    ports:
+    - '4444:4444'
+  selenium_node:
+    image: 'selenium/node-firefox:2.53.0'
+    depends_on:
+      - selenium_hub
+    environment:
+      HUB_PORT_4444_TCP_ADDR: selenium_hub
