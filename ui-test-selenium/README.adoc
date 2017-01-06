@@ -1,5 +1,7 @@
 = Selenium GRID
 
+[source,bash]
+----
 mvn verify -DtestSuite=wiki-sniff -DscreenshotsPath=/tmp/selenium -Dbrowser=firefox -Dplatform=LINUX -DhubURL=http://localhost:4444/wd/hub -DplfURL=http://locahost:8080/portal
 
 # creating new clean volumes for eXo Platform persistent data
@@ -8,3 +10,4 @@ $ docker volume create --name=exo_logs
 $ docker volume create --name=mysql_data
 # Start MySQL + PLF + Selenium HUB + Chrome and firefox drivers
 $ docker-compose up 
+----
