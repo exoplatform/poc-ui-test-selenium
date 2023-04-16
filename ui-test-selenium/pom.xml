@@ -15,7 +15,7 @@
   <properties>
 		<maven.surefire.plugin.version>2.19</maven.surefire.plugin.version>
 		<selenium-java.version>2.46.0</selenium-java.version>
-		<testng.version>6.3.1</testng.version>
+		<testng.version>7.7.0</testng.version>
 		<!-- eXo dependencies with UI Selenium Tests -->
 		<exo.ui.testsuite.version>4.2.x-POC-SNAPSHOT</exo.ui.testsuite.version>
 		<maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
